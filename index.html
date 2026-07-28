@@ -46,6 +46,22 @@
     <script>
       const canvas = document.querySelector("#unity-canvas");
 
+      /*
+       * ChromeOS 90% display size reports a logical screen width
+       * of approximately 1518px instead of the native 1366px.
+       *
+       * A CSS height of 598px therefore occupies only about
+       * 538 physical pixels at 90%, cutting off the lower UI.
+       *
+       * Increase the displayed canvas height to approximately
+       * 665px only at this display setting.
+       *
+       * The normal 100% layout remains exactly 598px high.
+       */
+      if (window.screen.width >= 1450) {
+        canvas.style.height = "665px";
+      }
+
       createUnityInstance(canvas, {
         arguments: [],
         dataUrl: "Build/student-randomiser-web.data",
